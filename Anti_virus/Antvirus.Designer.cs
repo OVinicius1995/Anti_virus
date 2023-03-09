@@ -119,12 +119,11 @@
             // 
             this.lblnow.AutoSize = true;
             this.lblnow.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.lblnow.Enabled = false;
-            this.lblnow.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblnow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblnow.Location = new System.Drawing.Point(203, 9);
+            this.lblnow.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblnow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblnow.Location = new System.Drawing.Point(166, 72);
             this.lblnow.Name = "lblnow";
-            this.lblnow.Size = new System.Drawing.Size(50, 19);
+            this.lblnow.Size = new System.Drawing.Size(75, 28);
             this.lblnow.TabIndex = 12;
             this.lblnow.Text = "label1";
             this.lblnow.TextAlign = System.Drawing.ContentAlignment.TopCenter;
