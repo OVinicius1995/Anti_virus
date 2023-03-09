@@ -22,9 +22,7 @@ namespace Anti_virus
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\TROCAR.cmd");
-            
+            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\TROCAR.cmd");           
             
         }
 
