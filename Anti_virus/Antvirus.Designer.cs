@@ -40,6 +40,7 @@
             this.lblnow = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnVarrD = new System.Windows.Forms.Button();
+            this.btnTeste = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnF
@@ -146,6 +147,16 @@
             this.btnVarrD.UseVisualStyleBackColor = true;
             this.btnVarrD.Click += new System.EventHandler(this.btnVarrD_Click);
             // 
+            // btnTeste
+            // 
+            this.btnTeste.Location = new System.Drawing.Point(218, 265);
+            this.btnTeste.Name = "btnTeste";
+            this.btnTeste.Size = new System.Drawing.Size(90, 26);
+            this.btnTeste.TabIndex = 14;
+            this.btnTeste.Text = "Teste";
+            this.btnTeste.UseVisualStyleBackColor = true;
+            this.btnTeste.Click += new System.EventHandler(this.btnTeste_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -154,6 +165,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(549, 434);
+            this.Controls.Add(this.btnTeste);
             this.Controls.Add(this.btnVarrD);
             this.Controls.Add(this.lblnow);
             this.Controls.Add(this.lbldatahora);
@@ -168,9 +180,11 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +202,7 @@
         private System.Windows.Forms.Label lblnow;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnVarrD;
+        private System.Windows.Forms.Button btnTeste;
     }
 }
 
