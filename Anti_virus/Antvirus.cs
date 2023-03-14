@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -16,310 +9,234 @@ namespace Anti_virus
 
     public partial class Form1 : Form
     {
+       
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\TROCAR.cmd");
-
-        }
-
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VarrF.cmd");
-
-            myProcess.Close();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(@"cmd.exe");
-        }
-
-        private void btnVarrerpc_Click(object sender, EventArgs e)
-        {
-
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VARRER_PC.cmd");
-
-            myProcess.Close();
-
-
-        }
-
-        private void btnG_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VarrG.cmd");
-
-            myProcess.Close();
-
-        }
-
-        private void btnE_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VarrE.cmd");
-
-            myProcess.Close();
-        }
-
-        private void btncancelar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnH_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VarrH.cmd");
-
-            myProcess.Close();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblnow.Text = (DateTime.Now.ToString());
-        }
+            pega_unidade pegunid = new pega_unidade();
 
-        private void btnVarrD_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
-
-            System.Diagnostics.Process.Start(@"C:\Users\ViniciusAbreudeOlive\Desktop\Projetos C#\Projeto ant-virus\Anti_virus\VarrD.bat");
-
-            myProcess.Close();
-
-
-        }
-
-        private void Form1_Load(object sender, FormClosingEventArgs e)
-        {
-
-
-        }
-
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == System.Windows.Forms.CloseReason.UserClosing)
+            foreach (var d in DriveInfo.GetDrives())
             {
-                MessageBox.Show("Poxaaaa não foi dessa vez que você conseguiu, mas tente sair pelo o botão sair *-*!","", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                MessageBox.Show("Não foi atoa que eu desenvolvi o botão sair. Muito obrigado!","", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btncancelar.Focus();
-                e.Cancel = true;
+
+                if (d.DriveType == DriveType.NoRootDirectory)
+                {
+
+                    MessageBox.Show("Opss... É um diretório root.");
+
+                }
+                else { txtUnidade.Text = d.Name; }
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pega_unidade pegunid = new pega_unidade();
             cmbUnidade.Enabled = false;
             btnLimparCmb.Enabled = false;
 
             foreach (var d in DriveInfo.GetDrives())
             {
 
-                if (d.IsReady & d.DriveType == DriveType.Removable)
+               if (d.DriveType == DriveType.NoRootDirectory)
                 {
-                    string pendrive = d.Name;
 
-                    txtUnidade.Text = d.Name;                   
+                    MessageBox.Show("Opss... É um diretório root.");
 
-                } else if (txtUnidade.Text == "Unidade") {
-                    MessageBox.Show("Não foi encontrado uma unidade específica para limpeza, isso pode ocorrer por seu removivel estar particionado. " +
-                                    "Para realizar a limpeza tente clicar em limpar depois em sim que será liberado o combobox com as opções encontradas neste computador.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Hand);
-                        break;
+                } else {
+                    
+                    txtUnidade.Text = d.Name;
                 }
             }
-        }
 
+        }
+        
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            var escolha = MessageBox.Show("A unidade pré-carregada está correta? ", "Unidade", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-            foreach (var d in DriveInfo.GetDrives())
+            pega_unidade unid = new pega_unidade();
+
+            if (escolha == System.Windows.Forms.DialogResult.Yes)
             {
 
-                if (d.IsReady & d.DriveType == DriveType.Removable)
+                foreach (var f in DriveInfo.GetDrives())
                 {
-                    string pendrive = d.Name;
 
-                    txtUnidade.Text = d.Name;
-
-                    switch (pendrive)
+                    if (f.DriveType == DriveType.NoRootDirectory)
                     {
-                        case "A:\\":
 
-                            MessageBox.Show("Unidade A:\\");
-                            break;
-
-                        case "B:\\":
-
-                            MessageBox.Show("Unidade B:\\");
-                            break;
-
-                        case "C:\\":
-
-                            MessageBox.Show("Unidade C:\\");
-                            break;
-
-                        case "D:\\":
-
-                            MessageBox.Show("Unidade D:\\");
-                            break;
-
-                        case "E:\\":
-
-                            MessageBox.Show("Unidade E:\\");
-                            break;
-
-                        case "F:\\":
-
-                            MessageBox.Show("Unidade F:\\");
-                            break;
-
-                        case "G:\\":
-
-                            MessageBox.Show("Unidade G:\\");
-                            break;
-
-                        case "H:\\":
-
-                            MessageBox.Show("Unidade H:\\");
-                            break;
-
-                        case "I:\\":
-
-                            MessageBox.Show("Unidade I:\\");
-                            break;
-
-                        case "J:\\":
-
-                            MessageBox.Show("Unidade J:\\");
-                            break;
-
-                        case "K:\\":
-
-                            MessageBox.Show("Unidade K:\\");
-                            break;
-
-                        case "L:\\":
-
-                            MessageBox.Show("Unidade L:\\");
-                            break;
-
-                        case "M:\\":
-
-                            MessageBox.Show("Unidade M:\\");
-                            break;
-
-                        case "N:\\":
-
-                            MessageBox.Show("Unidade N:\\");
-                            break;
-
-                        case "O:\\":
-
-                            MessageBox.Show("Unidade O:\\");
-                            break;
-
-                        case "P:\\":
-
-                            MessageBox.Show("Unidade P:\\");
-                            break;
-
-                        case "Q:\\":
-
-                            MessageBox.Show("Unidade Q:\\");
-                            break;
-
-                        case "R:\\":
-
-                            MessageBox.Show("Unidade R:\\");
-                            break;
-
-                        case "S:\\":
-
-                            MessageBox.Show("Unidade S:\\");
-                            break;
-
-                        case "T:\\":
-
-                            MessageBox.Show("Unidade T:\\");
-                            break;
-
-                        case "U:\\":
-
-                            MessageBox.Show("Unidade U:\\");
-                            break;
-
-                        case "V:\\":
-
-                            MessageBox.Show("Unidade V:\\");
-                            break;
-
-                        case "X:\\":
-
-                            MessageBox.Show("Unidade X:\\");
-                            break;
-
-                        case "Y:\\":
-
-                            MessageBox.Show("Unidade Y:\\");
-                            break;
-
-                        case "Z:\\":
-
-                            MessageBox.Show("Unidade Z:\\");
-                            break;
+                        MessageBox.Show("Opss... É um diretório root.");
+                        break;
                     }
-                }     
+                    else if (f.DriveType == DriveType.Removable && f.IsReady && f.DriveType != DriveType.Network) {
 
-               else if (d.IsReady & d.DriveType == DriveType.Removable || txtUnidade.Text == "Unidade")
-                {
-                    var escolha = MessageBox.Show("Não foi encontrada nenhuma unidade removivel, deseja ver as unidades disponíveis neste computador? ", "Unidade não encontrada!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        var pendrive = f.Name;
 
-
-                    if (escolha == System.Windows.Forms.DialogResult.Yes)
-                    {
-                        cmbUnidade.Enabled   = true;
-                        cmbUnidade.Text      = "Unidades";
-                        btnLimpar.Enabled    = false;
-                        btnLimparCmb.Enabled = true;
-
-                        foreach (var s in DriveInfo.GetDrives())
+                        switch (pendrive)
                         {
+                            case "A:\\":
 
-                            string[] unidades = new string[1] { $"{s.Name}" };
-                            this.cmbUnidade.Items.Add(unidades[0]);
+                                unid.limpaVirus(pendrive);
+                                break;
 
+                            case "B:\\":
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "C:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "D:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "E:\\":
+                                
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "F:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "G:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "H:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "I:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "J:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "K:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "L:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "M:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "N:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "O:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "P:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "Q:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "R:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "S:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "T:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "U:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "V:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "X:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "Y:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
+
+                            case "Z:\\":
+
+                                unid.limpaVirus(pendrive);
+                                break;
                         }
-
-
                     }
+                }
+            } else if (escolha == System.Windows.Forms.DialogResult.No) {
 
-                    else if (escolha == System.Windows.Forms.DialogResult.No || escolha == System.Windows.Forms.DialogResult.Cancel)
-                    {
-                        MessageBox.Show("Encerrando...","Saindo da aplicação!",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                        Application.Exit();
+
+                MessageBox.Show("Peço por gentileza que verifique se na lista abaixo está sendo apresentado a unidada da qual será feita a limpeza.","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                cmbUnidade.Enabled = true;
+                btnLimparCmb.Enabled = true;
+                btnLimpar.Enabled = false;
+
+                cmbUnidade.Text = "Escolha a Unidade";
+
+                foreach (var g in DriveInfo.GetDrives() ) { 
+                    if (g.IsReady || txtUnidade.Text == "Unidade" || g.DriveType != DriveType.Network) { 
+
+                       string[] unidades = new string[1] { $"{g.Name}" };
+                        this.cmbUnidade.Items.Add(unidades[0]);
                     }
-
-                    break;
                 }
             }
         }
 
-        private void btnLimparCmb_Click(object sender, EventArgs e)
+    private void btnLimparCmb_Click(object sender, EventArgs e)
         {
+
+            pega_unidade unid = new pega_unidade(); 
+
+            if (cmbUnidade.Text == "Escolha a Unidade" || cmbUnidade.Text == "") {
+
+                MessageBox.Show("É preciso selecionar uma unidade.", "Unidade incorreta ou em branco!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            } else { 
 
             var unidadeSelecionada = cmbUnidade.Text;
 
@@ -327,128 +244,170 @@ namespace Anti_virus
             {
                 case "A:\\":
 
-                    MessageBox.Show("Unidade A:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "B:\\":
 
-                    MessageBox.Show("Unidade B:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "C:\\":
 
-                    MessageBox.Show("Unidade C:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "D:\\":
 
-                    MessageBox.Show("Unidade D:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "E:\\":
 
-                    MessageBox.Show("Unidade E:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "F:\\":
 
-                    MessageBox.Show("Unidade F:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "G:\\":
-
-                    MessageBox.Show("Unidade G:\\");
+                                           
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "H:\\":
 
-                    MessageBox.Show("Unidade H:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "I:\\":
 
-                    MessageBox.Show("Unidade I:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "J:\\":
 
-                    MessageBox.Show("Unidade J:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "K:\\":
 
-                    MessageBox.Show("Unidade K:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "L:\\":
 
-                    MessageBox.Show("Unidade L:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "M:\\":
-
-                    MessageBox.Show("Unidade M:\\");
+                        
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "N:\\":
 
-                    MessageBox.Show("Unidade N:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "O:\\":
 
-                    MessageBox.Show("Unidade O:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "P:\\":
-
-                    MessageBox.Show("Unidade P:\\");
+                  
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "Q:\\":
-
-                    MessageBox.Show("Unidade Q:\\");
+                        
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "R:\\":
 
-                    MessageBox.Show("Unidade R:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "S:\\":
 
-                    MessageBox.Show("Unidade S:\\");
-                    break;
+                   unid.limpaVirus(unidadeSelecionada);
+                   cmbUnidade.Text = "Escolha a Unidade";
+                   break;
 
                 case "T:\\":
 
-                    MessageBox.Show("Unidade T:\\");
-                    break;
+                   cmbUnidade.Text = "Escolha a Unidade";
+                   unid.limpaVirus(unidadeSelecionada);
+                   break;
 
                 case "U:\\":
 
-                    MessageBox.Show("Unidade U:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "V:\\":
 
-                    MessageBox.Show("Unidade V:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "X:\\":
 
-                    MessageBox.Show("Unidade X:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "Y:\\":
 
-                    MessageBox.Show("Unidade Y:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
 
                 case "Z:\\":
 
-                    MessageBox.Show("Unidade Z:\\");
+                    unid.limpaVirus(unidadeSelecionada);
+                    cmbUnidade.Text = "Escolha a Unidade";
                     break;
+                }
+            }
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == System.Windows.Forms.CloseReason.UserClosing)
+            {
+                MessageBox.Show("Poxaaaa não foi dessa vez que você conseguiu, mas tente sair pelo o botão sair *-*!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Não foi atoa que eu desenvolvi o botão sair. Muito obrigado!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnSair.Focus();
+                e.Cancel = true;
             }
         }
     }

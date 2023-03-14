@@ -52,6 +52,7 @@
       <DependentUpon>Antvirus.cs</DependentUpon>
     </Compile>
     <Compile Include="Ant-virus.cs" />
+    <Compile Include="pega_unidade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Antvirus.resx">
       <DependentUpon>Antvirus.cs</DependentUpon>

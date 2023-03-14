@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.btncancelar = new System.Windows.Forms.Button();
+            this.btnSair = new System.Windows.Forms.Button();
             this.lbldatahora = new System.Windows.Forms.Label();
             this.lblnow = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -41,16 +41,16 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
-            // btncancelar
+            // btnSair
             // 
-            this.btncancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btncancelar.Location = new System.Drawing.Point(397, 380);
-            this.btncancelar.Name = "btncancelar";
-            this.btncancelar.Size = new System.Drawing.Size(140, 42);
-            this.btncancelar.TabIndex = 11;
-            this.btncancelar.Text = "Sair";
-            this.btncancelar.UseVisualStyleBackColor = true;
-            this.btncancelar.Click += new System.EventHandler(this.btncancelar_Click);
+            this.btnSair.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSair.Location = new System.Drawing.Point(397, 380);
+            this.btnSair.Name = "btnSair";
+            this.btnSair.Size = new System.Drawing.Size(140, 42);
+            this.btnSair.TabIndex = 11;
+            this.btnSair.Text = "Sair";
+            this.btnSair.UseVisualStyleBackColor = true;
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // lbldatahora
             // 
@@ -138,7 +138,7 @@
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.lblnow);
             this.Controls.Add(this.lbldatahora);
-            this.Controls.Add(this.btncancelar);
+            this.Controls.Add(this.btnSair);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -156,7 +156,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btncancelar;
+        private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.Label lbldatahora;
         private System.Windows.Forms.Label lblnow;
         private System.Windows.Forms.Timer timer1;
