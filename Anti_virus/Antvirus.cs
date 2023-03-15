@@ -24,7 +24,7 @@ namespace Anti_virus
             foreach (var d in DriveInfo.GetDrives())
             {
 
-                if (d.DriveType == DriveType.NoRootDirectory)
+                if (d.DriveType == DriveType.NoRootDirectory && d.DriveType == DriveType.Network)
                 {
 
                     MessageBox.Show("Opss... É um diretório root.");
@@ -43,7 +43,7 @@ namespace Anti_virus
             foreach (var d in DriveInfo.GetDrives())
             {
 
-               if (d.DriveType == DriveType.NoRootDirectory)
+               if (d.DriveType == DriveType.NoRootDirectory && d.DriveType == DriveType.Network)
                 {
 
                     MessageBox.Show("Opss... É um diretório root.");
@@ -68,7 +68,7 @@ namespace Anti_virus
                 foreach (var f in DriveInfo.GetDrives())
                 {
 
-                    if (f.DriveType == DriveType.NoRootDirectory)
+                    if (f.DriveType == DriveType.NoRootDirectory && f.DriveType == DriveType.Network)
                     {
 
                         MessageBox.Show("Opss... É um diretório root.");
